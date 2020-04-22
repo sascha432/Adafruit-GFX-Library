@@ -1375,8 +1375,8 @@ void Adafruit_GFX::charBounds(char c, int16_t *x, int16_t *y, int16_t *minx,
     } else if (c != '\r') { // Not a carriage return; is normal char
       uint8_t first = pgm_read_byte(&gfxFont->first),
               last = pgm_read_byte(&gfxFont->last);
-      if ((c >= first) && (c <= last)) { // Char present in this font?
-        GFXglyph *glyph = pgm_read_glyph_ptr(gfxFont, c - first);
+      if (((uint8_t)c >= first) && ((uint8_t)c <= last)) { // Char present in this font?
+        GFXglyph *glyph = pgm_read_glyph_ptr(gfxFont, (uint8_t)c - first);
         uint8_t gw = pgm_read_byte(&glyph->width),
                 gh = pgm_read_byte(&glyph->height),
                 xa = pgm_read_byte(&glyph->xAdvance);
